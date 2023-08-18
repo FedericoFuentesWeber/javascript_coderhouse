@@ -1,37 +1,67 @@
-const dolarBlue = 574;
-const dolarOficial = 291;
-const dolarMep = 552;
+class Cotizacion {
+    constructor(nombre, valorActual) {
+        this.nombre = nombre;
+        this.valorActual = valorActual;
+    }
 
-const calcular = (dinero, valorDolar) => dinero * valorDolar;
+    calcularCotizacion(dineroACambiar) {
+        var conversión = dineroACambiar / this.valorActual;
+        return conversión.toFixed(3);
+    }
+}
 
-let sueldo = parseInt(prompt("Ingrese su sueldo neto."));
+const dolarBlue = new Cotizacion("Blue", 760);
+const dolarOficial = new Cotizacion("Oficial", 365);
+const dolarMep = new Cotizacion("Mep", 700);
+const dolarTurista = new Cotizacion("Turista", 657);
+
+var cotizacionesDeDolares = [dolarBlue, dolarOficial, dolarMep, dolarTurista];
+
+function encontrarElemento(nombre, array) {
+    for (var i = 0; i < array.length; i++) {
+        if (array[i].nombre === nombre) {
+            return array[i];
+        }
+    }
+    return null;
+}
+
+function mostrarCotizacionesPorPantalla(dinero) {
+    contenedor.innerHTML = "";
+
+    cotizacionesDeDolares.forEach((item) => {
+        let div = document.createElement("div");
+        div.innerHTML = `
+            <p>Cotización: ${item.nombre}</p>
+            <b>&nbsp;$${item.calcularCotizacion(dinero)}</b>
+        `;
+
+        contenedor.append(div);
+    });
+
+}
+
+let sueldo = parseInt(prompt("Ingrese su sueldo neto. Debe ser como mínimo $246.000"));
 
 if(sueldo < 246000) {
     alert("Sueldo insuficiente, debe ser mayor a $246.000 para abrír una cuenta.");
 } else {
     alert("Felicitaciones, pudo abrír una cuenta.");
-    let cantidadParaCambiar = parseInt(prompt("Cuanto dinero desea cambiar a dolares?"));
 
-    
-    let cotización = prompt("Elija la cotización que desea conocer: Blue, Oficial, Mep");
-    
-    for(let cantidadDeCotizaciones = 1; cantidadDeCotizaciones<=5; cantidadDeCotizaciones++) {
-        switch(cotización) {
-            case "Blue":
-                alert(`Su cotización es de ${calcular(cantidadParaCambiar, dolarBlue)}`);
-                break;
-            case "Oficial":
-                alert(`Su cotización es de ${calcular(cantidadParaCambiar, dolarOficial)}`);
-                break;
-            case "Mep":
-                alert(`Su cotización es de ${calcular(cantidadParaCambiar, dolarMep)}`);
-                break;
-            default:
-                alert("Seleccione una de las cotizaciones antes mencionadas");
-                break;
-        }
-        cotización = prompt("Elija la cotización que desea conocer: Blue, Oficial, Mep");     
+    let cantidadParaCambiar = parseInt(prompt("Cuanto dinero desea cambiar a dolares?"));   
+
+    for(let cantidadDeCotizaciones=1; cantidadDeCotizaciones<=10; cantidadDeCotizaciones++){
+        mostrarCotizacionesPorPantalla(cantidadParaCambiar);
+
+        setTimeout(function () {
+            cantidadParaCambiar = parseInt(prompt("Cuanto dinero desea cambiar a dolares?"));
+            if (cantidadParaCambiar > 0) {
+                mostrarCotizacionesPorPantalla(cantidadParaCambiar);
+            } else {
+                alert("Introduzca un valor mayor a cero.");
+                cantidadParaCambiar = parseInt(prompt("Cuanto dinero desea cambiar a dolares?"));
+                mostrarCotizacionesPorPantalla(cantidadParaCambiar);
+            }
+        }, 2000);
     }
-    
-    alert("Ya llegó al límite de cotizaciones diarias, vuelva mañana.")
 }
