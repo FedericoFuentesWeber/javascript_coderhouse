@@ -26,19 +26,16 @@ function encontrarElemento(nombre, array) {
     return null;
 }
 
-function mostrarCotizacionesPorPantalla(dinero) {
+function mostrarCotizacionesPorPantalla(dolar, dinero) {
     contenedor.innerHTML = "";
 
-    cotizacionesDeDolares.forEach((item) => {
-        let div = document.createElement("div");
-        div.innerHTML = `
-            <p>Cotización: ${item.nombre}</p>
-            <b>&nbsp;$${item.calcularCotizacion(dinero)}</b>
+    let div = document.createElement("div");
+    div.innerHTML = `
+            <p>Cotización: ${dolar.nombre}</p>
+            <b>&nbsp;$${dolar.calcularCotizacion(dinero)}</b>
         `;
 
-        contenedor.append(div);
-    });
-
+    contenedor.append(div);
 }
 
 let sueldo = parseInt(prompt("Ingrese su sueldo neto. Debe ser como mínimo $246.000"));
@@ -49,18 +46,23 @@ if(sueldo < 246000) {
     alert("Felicitaciones, pudo abrír una cuenta.");
 
     let cantidadParaCambiar = parseInt(prompt("Cuanto dinero desea cambiar a dolares?"));   
+    let cotización = prompt("Elija la cotización que desea conocer: Blue, Oficial, Mep, Turista.");
 
     for(let cantidadDeCotizaciones=1; cantidadDeCotizaciones<=10; cantidadDeCotizaciones++){
-        mostrarCotizacionesPorPantalla(cantidadParaCambiar);
+        var dolar = encontrarElemento(cotización, cotizacionesDeDolares);
+
+        mostrarCotizacionesPorPantalla(dolar, cantidadParaCambiar);
 
         setTimeout(function () {
             cantidadParaCambiar = parseInt(prompt("Cuanto dinero desea cambiar a dolares?"));
+            cotización = prompt("Elija la cotización que desea conocer: Blue, Oficial, Mep, Turista.");
             if (cantidadParaCambiar > 0) {
-                mostrarCotizacionesPorPantalla(cantidadParaCambiar);
+                mostrarCotizacionesPorPantalla(dolar, cantidadParaCambiar);
             } else {
                 alert("Introduzca un valor mayor a cero.");
                 cantidadParaCambiar = parseInt(prompt("Cuanto dinero desea cambiar a dolares?"));
-                mostrarCotizacionesPorPantalla(cantidadParaCambiar);
+                cotización = prompt("Elija la cotización que desea conocer: Blue, Oficial, Mep, Turista.");
+                mostrarCotizacionesPorPantalla(dolar, cantidadParaCambiar);
             }
         }, 2000);
     }
