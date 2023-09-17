@@ -30,10 +30,20 @@ export default function quotesView() {
         const dollarType = formData.dollarType
 
         if (isNaN(amountOfDollarsToBuy) || amountOfDollarsToBuy < 0) {
-            replaceContent(invalidAmountView());
+            Swal.fire({
+                title: `El monto a comprar no es valido, ingrese un número mayor a cero`,
+                icon: 'warning',
+                confirmButton: 'OK'
+            })
         } else {
         const dollarQuote = dollarQuotes.find(dollarQuote => dollarQuote.dollarType === dollarType);
-        if (!dollarQuote) console.log('La cotización seleccionada no es valida, por favor elija otra.')
+        if (!dollarQuote) {
+            Swal.fire({
+                title: `La cotización seleccionada no es valida, por favor elija otra`,
+                icon: 'warning',
+                confirmButton: 'OK'
+            })
+        }
         const amountOfPesos = dollarQuote.amountOfPesosToBuy(amountOfDollarsToBuy);
 
         let quotes = document.getElementById('quotes');
