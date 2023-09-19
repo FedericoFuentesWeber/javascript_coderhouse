@@ -1,5 +1,5 @@
 import { label, numericInput, select, submitButton, form, table, addRow } from "../components/index.js"
-import { DOLLAR_TYPES } from '../quotes/index.js'
+import { DOLLAR_TYPES } from '../quotes/dollarTypes.js'
 import { addContent } from '../utils.js'
 
 async function fetchDollarQuotes() {
