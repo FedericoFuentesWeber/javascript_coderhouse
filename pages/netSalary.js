@@ -9,7 +9,7 @@ export default function netSalaryView() {
         numericInput('salaryInPesos', 'salaryInPesos'),
         submitButton('Aceptar')
     ]
-    const netSalaryForm = form(formElements, (formData) => {
+    const netSalaryForm = form(formElements, async (formData) => {
         const salaryInPesos = parseInt(formData.salaryInPesos)
         if (isNaN(salaryInPesos) || salaryInPesos < 246000) {
             Swal.fire({
@@ -19,7 +19,12 @@ export default function netSalaryView() {
             })
         } else {
             context.salaryInPesos = salaryInPesos;
-            replaceContent(quotesView());
+            try {
+                const components = await quotesView();
+                replaceContent(components);
+            } catch (error) {
+                console.error('An error ocurred', error);
+            }
         }
     })
     return [netSalaryForm]
