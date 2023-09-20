@@ -1,0 +1,62 @@
+body {
+    background-color: #1f1f1f;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 20rem;
+    gap: 1rem;
+}
+
+label {
+    font-size: x-large;
+    color: rgb(100, 206, 171);
+}
+
+input {
+    width: 70%;
+    text-align: center;
+    height: 50px;
+    font-size: 20px;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+button {
+    width: 200px;
+    height: 58px;
+    font-size: 20px;
+    background-color: rgb(100, 206, 171);
+    border: none;
+    border-radius: 4px;
+    padding-block: 1px;
+    padding-inline: 6px;
+    cursor: pointer;
+}
+
+select {
+    width: 200px;
+    height: 30px;
+    font-size: 20px;
+    background-color: rgb(100, 206, 171);
+    border: none;
+    border-radius: 4px;
+    padding-block: 1px;
+    padding-inline: 6px;
+    text-align: center;
+}
+
+table {
+    color: rgb(100, 206, 171);
+    width: 100%;
+    text-align: center;
+
+}
+
+td {
+    width: 100%;
+    max-width: calc(33.33%);
+}
