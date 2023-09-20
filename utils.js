@@ -1,6 +1,5 @@
 const main = document.getElementById('main')
 
-//export const replaceContent = items => main.replaceChildren(...items)
 export const replaceContent = items => {
     main.innerHTML = '';
 
