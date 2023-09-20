@@ -2,7 +2,6 @@ import { label, numericInput, submitButton, form } from "../components/index.js"
 import { replaceContent } from '../utils.js'
 import { context } from "../context.js"
 import quotesView from './quotes.js'
-import notEnoughMoneyView from "./notEnoughMoney.js"
 
 export default function netSalaryView() {
     const formElements = [
@@ -10,13 +9,22 @@ export default function netSalaryView() {
         numericInput('salaryInPesos', 'salaryInPesos'),
         submitButton('Aceptar')
     ]
-    const netSalaryForm = form(formElements, (formData) => {
+    const netSalaryForm = form(formElements, async (formData) => {
         const salaryInPesos = parseInt(formData.salaryInPesos)
         if (isNaN(salaryInPesos) || salaryInPesos < 246000) {
-            replaceContent(notEnoughMoneyView());
+            Swal.fire({
+                title: `El monto ingresado debe ser mayor a $246.000`,
+                icon: 'warning',
+                confirmButton: 'OK'
+            })
         } else {
             context.salaryInPesos = salaryInPesos;
-            replaceContent(quotesView());
+            try {
+                const components = await quotesView();
+                replaceContent(components);
+            } catch (error) {
+                console.error('An error ocurred', error);
+            }
         }
     })
     return [netSalaryForm]

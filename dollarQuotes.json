@@ -1,0 +1,18 @@
+[
+    {
+        "dollarType": "Blue",
+        "equivalentInPesos": 760
+    },
+    {
+        "dollarType": "Oficial",
+        "equivalentInPesos": 365
+    },
+    {
+        "dollarType": "MEP",
+        "equivalentInPesos": 700
+    },
+    {
+        "dollarType": "Turista",
+        "equivalentInPesos": 657
+    }
+]
